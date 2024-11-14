@@ -50,13 +50,19 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText3",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"parameter1": "devenvstorageacc"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "DelimitedText4",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"parameter1": "devenvstorageacc"
+						}
 					}
 				]
 			}
