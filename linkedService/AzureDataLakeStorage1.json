@@ -1,22 +1,12 @@
 {
 	"name": "AzureDataLakeStorage1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
 			"url": "https://devenvstorageacc.dfs.core.windows.net/",
-			"tenant": "83d3ebc1-48f0-435e-9b65-586a8310af3b",
-			"servicePrincipalId": "3589db5a-14ee-4c77-ab0f-0304436ae7b0",
-			"servicePrincipalCredentialType": "ServicePrincipalKey",
-			"servicePrincipalCredential": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "secretname",
-				"secretVersion": "d40416b2db3e4747a79377d825181d3a"
-			}
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEYwNzQyOTFGLTEzOUItNDU0Qy1CRTQ3LTVFQTIxNzcwNDhFNV9lMWQwZTQxOS0xYjdmLTQ4NWMtYmY0YS0yYmFlYjViYWZkMTEiDQp9"
 		}
 	}
 }
