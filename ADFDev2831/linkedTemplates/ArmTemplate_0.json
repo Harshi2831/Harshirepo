@@ -189,7 +189,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copydata1",
+						"name": "source to target",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
