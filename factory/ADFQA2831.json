@@ -1,0 +1,9 @@
+{
+	"name": "ADFQA2831",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fe916533-1a23-4c49-b11a-889247859b4c",
+		"tenantId": "83d3ebc1-48f0-435e-9b65-586a8310af3b"
+	}
+}
