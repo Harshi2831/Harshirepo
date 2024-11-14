@@ -228,14 +228,18 @@
 							{
 								"referenceName": "DelimitedText3",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"parameter1": "devenvstorageacc"
+								}
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DelimitedText4",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"parameter1": "devenvstorageacc"
+								}
 							}
 						]
 					}
