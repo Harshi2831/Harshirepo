@@ -103,23 +103,66 @@ Drag and drop the Copy Data activity onto the canvas.
         If successful, click Publish All to save your pipeline.
 
 
-# Note: If you would like to push N number of files into the pipeline, you can achieve it by the option called ”wildcard file path” in the source tab as shown in the below screenshot.
+# Note: If you would like to push N number of files into the pipeline,
+  you can achieve it by the option called ”wildcard file path” in the source tab as shown in the below screenshot.
 
 # Step 2: Databricks Activity (Incremental/Delta Processing)
-2.1. Set Up Databricks
-        Incremental and delta processing in Databricks allows for the processing of data in a way that is more efficient and cost-effective than repeated batch jobs.
+# 2.1. Set Up Databricks
+Incremental and delta processing in Databricks allows for the processing of data in a way that is more efficient and cost-effective than repeated batch jobs.
 Create an Azure Databricks Workspace:
 In the Azure Portal, search for "Azure Databricks" and click "Create".
 Provide the required details and click "Review + Create", then "Create".
 Once created, launch the Databricks workspace.
-Create a Databricks Cluster:
+
+# 2.2 Create a Databricks Cluster:
 In the Databricks workspace, go to Clusters > Create Cluster.
 Configure the cluster settings (e.g., name, node types) and create
-2.2. Create a Databricks Notebook for Incremental Processing
+
+# 2.3 Create a Databricks Notebook for Incremental Processing
 Set Up a Notebook:
 In Databricks, click "Create" > "Notebook".
 Name the notebook (e.g., Incremental_Processing).
 Choose Language as PySpark.
-Read Data from Raw (Bronze) Container:
+Read Data from Raw (Bronze) Container
+
+      storage_account_name = "practicestrgacc"
+      storage_account_key = "OjW3Dt8+bA9SZR2cFS2jWYJopJRBHmHTo7Rar81b73XKDYs6WY+MW6D69Bxm63AkLUITZ4UnFNqh+AStDgcuxA=="
+        
+    # Configure Spark to use the storage account key
+    spark.conf.set(f"fs.azure.account.key.practicestrgacc.dfs.core.windows.net","OjW3Dt8+bA9SZR2cFS2jWYJopJRBHmHTo7Rar81b73XKDYs6WY+MW6D69Bxm63AkLUITZ4UnFNqh+AStDgcuxA==")
+
+      accounts_df = spark.read.format("csv").option("header", "true").load("abfss://raw@practicestrgacc.dfs.core.windows.net/accounts.csv")
+      accounts_df.show(5)
+
+       # 2. Handle Missing Values
+       accounts_df = accounts_df.fillna({'balance': 'Unknown'})
+
+    # 3. Remove Duplicate Rows
+    accounts_df = accounts_df.dropDuplicates()
+    display(accounts_df)
+    
+    # Remove rows with null values in important columns
+      accounts_df = accounts_df.dropna(subset=["account_id", "balance"])
+      
+      # Remove duplicate rows
+      accounts_df = accounts_df.dropDuplicates(["account_id"])
+      accounts_df.show(10)
+
+    accounts_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df.csv")
+    accounts_df.show(10)
+      
+
+    
+# 2.4 Databricks Activity (ETL Processing)
+1. Create Another Databricks Notebook for ETL
+Set Up a New Notebook:
+Create another notebook named ETL_Processing.
+Read Data from Curated (Silver) Container:
+2. Transformation Logic
+Calculate Total Balance for Each Customer:
+3. Save Data to Refined (Gold) Container
+
+   
+
 
 
