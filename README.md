@@ -278,7 +278,70 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
     ![Screenshot 2024-11-11 170651](https://github.com/user-attachments/assets/b8081de4-77c3-4bba-b119-a217ac148687)
 
 
-    
+
+=====================================================================================================================================================================================================
+
+
+
+# How to create Azure Key Vault:
+			
+# Create Azure Key-Vault
+
+Select resource group: “practice2831”
+Key vault name: “mykeyvault1”
+Region: “Canada Central”
+Access Configuration:
+Permission model - select : Vault access policy
+Access policies - check the box “Name”
+Access policies - select “create”
+In permissions : under “Secret permissions” check the box “select all”
+In principle: Type the name of the Azure Data Factory: “adfpractice”
+Applications (No change)
+Review + Create - Create
+Select : objects - Secrets
++ Generate/Import 
+Secret Name: “mysecret”
+Secret value: (act as password)
+Create
+=============================================================
+
+# How to create Service principal:
+		
+A Service Principal in Azure is an identity used by applications, automated processes, or virtual machines to access Azure resources securely. It's essentially an identity with specific permissions, enabling secure access without requiring a user login. Service principals are commonly used for applications to authenticate and perform operations in Azure without user intervention.
+
+# Key Points about Service Principals:
+Role-Based Access Control (RBAC): A service principal can be granted specific permissions through Azure RBAC, allowing it to access only the necessary resources and perform certain actions.
+Authentication: Service principals can authenticate using a client secret (a password) or a certificate.
+Azure Active Directory (AAD): Service principals are managed within Azure Active Directory.
+
+# Steps to Create a Service Principal
+You can create a service principal using the Azure Portal, Azure CLI, or Azure PowerShell. Here’s how to do it with each method:
+Method 1: Using Azure Portal
+Go to Azure Active Directory:
+In the Azure portal, navigate to Azure Active Directory.
+Register a New Application:
+Under Manage, select App registrations.
+Click on New registration.
+Enter a name for the application (e.g., MyAppServicePrincipal).
+For Supported account types, select the relevant option based on your requirements (usually "Accounts in this organizational directory only").
+Click Register.
+Create a Client Secret or Certificate:
+After the app is created, go to Certificates & secrets.
+Under Client secrets, click + New client secret.
+Provide a description and select an expiration period for the client secret.
+Click Add and copy the Value (client secret), as you’ll need it later. Note that this value won’t be shown again.
+Note Down Application (Client) ID and Directory (Tenant) ID:
+In the app’s Overview section, copy the Application (client) ID and Directory (tenant) ID. You’ll need these values for authentication.
+Assign RBAC Permissions:
+Navigate to the resource (e.g., Key Vault, Storage Account) that the service principal needs to access.
+Go to Access Control (IAM) and click on Add role assignment.
+Select the appropriate role (e.g., Contributor, Reader, or Key Vault Secrets Officer).
+Under Assign access to, choose User, group, or service principal.
+Search for the name of your newly created app registration (the service principal), select it, and click Save.
+
+# Note: Service principal id and object id are same, you can find it in the overview page.
+Role- Storage blob data reader role is created to read the blob data in azure data lake storage gen 2 
+
 
 
 
