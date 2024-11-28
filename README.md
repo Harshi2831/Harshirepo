@@ -106,7 +106,8 @@ Drag and drop the Copy Data activity onto the canvas.
         If successful, click Publish All to save your pipeline.
 
 
-# Note: If you would like to push N number of files into the pipeline,
+# Note:
+   If you would like to push N number of files into the pipeline,
   you can achieve it by the option called ”wildcard file path” in the source tab as shown in the below screenshot.
 
 # Step 2: Databricks Activity (Incremental/Delta Processing)
@@ -253,5 +254,25 @@ Configure a dedicated SQL pool or use the serverless SQL pool.
     https://github.com/user-attachments/assets/f214ab5a-2326-4549-a153-b1cf52c6871d
 
 
+Define External Data Sources for Silver container by selecting appropriate database in ‘use database’
 
+
+Verify whether the data sources are created for both the containers in the  Data>workspace.
+Create External Tables in Synapse for both the curated and refined data. Choose the container in Data>linked for which you wanted to create an external table.
+
+   Name the external table name a unique table name followed by schema dbo(default schema name).
    
+   This is how we can create an External table with an Automatic code generator. 
+   
+   This allows data analysts and business intelligence teams to access and query the data directly using tools like Synapse Studio or notebooks.
+
+         ![Screenshot 2024-11-11 175516](https://github.com/user-attachments/assets/5e66186f-2c31-4bc2-a40c-874835a29fd3)
+      ![Screenshot 2024-11-11 175217](https://github.com/user-attachments/assets/992433df-da19-4c66-bde9-04464ff143f9)
+      ![Screenshot 2024-11-11 174839](https://github.com/user-attachments/assets/308580b1-1ab9-4d35-9d47-e8a20ada25cf)
+      ![Screenshot 2024-11-11 174811](https://github.com/user-attachments/assets/2cdb75ce-3329-474a-b7df-14eb8a2ba2a3)
+      ![Screenshot 2024-11-11 174517](https://github.com/user-attachments/assets/58bb1928-2f9e-4d3d-91d4-364e3c1d2343)
+      ![Screenshot 2024-11-11 174342](https://github.com/user-attachments/assets/25b36afc-d57e-48bc-a495-394b56e4183f)
+      ![Screenshot 2024-11-11 174126](https://github.com/user-attachments/assets/8884f35a-b690-4a2f-902b-91ff894c684d)
+      ![Screenshot 2024-11-11 174113](https://github.com/user-attachments/assets/65ef78b4-d340-43b1-8096-76d4ee8c6572)
+      ![Screenshot 2024-11-11 173947](https://github.com/user-attachments/assets/2839a95f-6867-4f3f-8f4d-1ec21d807890)
+      
