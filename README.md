@@ -83,11 +83,11 @@ Use either Account Key or SAS token for authentication.
 Create a Linked Service for Your Data Lake Storage or any other storage as per the requirment:
 Repeat the steps above for your own Data Lake Storage account.
 
-You can choose HTTP Linked service to work 
+You can choose HTTP Linked service to work. 
 An HTTP linked service in Azure Data Factory is used to connect to external REST APIs or web services for integration into your data pipelines. It is helpful in scenarios where you need to pull data from external APIs, send data to external endpoints, or integrate with third-party services.
 
-#Reasons to Use an HTTP Linked Service:
-#External API Data Ingestion:
+# Reasons to Use an HTTP Linked Service:
+# External API Data Ingestion:
 
 Retrieve data from REST APIs (e.g., weather data, stock prices, IoT data).
 Useful for integrating with public or private web APIs.
@@ -160,27 +160,38 @@ Navigate to the Author Tab:
 Click "Author" > "+" > "Pipeline".
 Add a Copy Data Activity from "Move and transform":
 Drag and drop the Copy Data activity onto the canvas.
-# 2.1Configure the Source:
+# 2.1 Configure the Source:
         Select Source in the Copy Data activity settings.
         Click New to add a dataset pointing to the backend storage account.
         Choose DelimitedText for CSV files or JSON for JSON file likewise choose appropriate option as per your backend storage file formate.
         Specify the path for each file.
 
-# 2.2Configure the Sink:
+# 2.2 Configure the Sink:
         Select Sink in the Copy Data activity settings.
         Click New to add a dataset pointing to your Data Lake Storage Raw (Bronze) container.
         Specify the destination paths (e.g., raw/accounts.csv, raw/customers.csv).
 
-# 2.3Set Up Parameters (Optional for Dynamic Configurations):
+  
+	
+
+
+# 2.3 Set Up Parameters (Optional for Dynamic Configurations):
         Use parameters to define file paths, making your pipeline flexible and easily configurable.
-# 2.4Debug and Publish:
+# 2.4 Debug and Publish:
         Click Debug to test the pipeline.
         If successful, click Publish All to save your pipeline.
-
+	
 
 # Note:
    If you would like to push N number of files into the pipeline,
   you can achieve it by the option called ”wildcard file path” in the source tab as shown in the below screenshot.
+  
+   	        ![Screenshot 2024-11-27 224150](https://github.com/user-attachments/assets/c75a83fa-ee83-4fd6-b961-205576d3272d)
+		![Screenshot 2024-11-27 224123](https://github.com/user-attachments/assets/b6e5d3a6-63ba-4740-902a-5b1a7b7b294e)
+		![Screenshot 2024-11-27 224009](https://github.com/user-attachments/assets/4ce5f306-b992-4b8a-b495-e3e6f60b4d63)
+		![Screenshot 2024-11-27 223918](https://github.com/user-attachments/assets/d1eec42a-ad60-45e8-8af4-a529cfd2e159)
+
+  
 
 # Step 2: Databricks Activity (Incremental/Delta Processing)
 # 2.1. Set Up Databricks
