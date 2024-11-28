@@ -52,7 +52,8 @@ Loading: Transformed data is written into Azure Synapse Analytics.
 
 Automation and Monitoring: Pipelines are automated with triggers and monitored for performance and errors.
 
-      https://www.google.com/url?sa=i&url=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fazure%2Farchitecture%2Fsolution-ideas%2Farticles%2Fazure-databricks-modern-analytics-            architecture&psig=AOvVaw0PDJViS7nEHL3jqgskCXP9&ust=1732839710633000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi2yI_h_YkDFQAAAAAdAAAAABAE
+	![image](https://github.com/user-attachments/assets/538f98e1-fbb4-4f0d-8fa6-0358b297b0e6)
+
 
 # Step-by-Step Implementation
 # Step 1: Data Ingestion (Backend Storage to Raw(Bronze) Container):
