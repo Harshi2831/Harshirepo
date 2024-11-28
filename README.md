@@ -162,25 +162,25 @@ Click "Author" > "+" > "Pipeline".
 Add a Copy Data Activity from "Move and transform":
 Drag and drop the Copy Data activity onto the canvas.
 # 2.1 Configure the Source:
-        Select Source in the Copy Data activity settings.
-        Click New to add a dataset pointing to the backend storage account.
-        Choose DelimitedText for CSV files or JSON for JSON file likewise choose appropriate option as per your backend storage file formate.
-        Specify the path for each file.
+Select Source in the Copy Data activity settings.
+Click New to add a dataset pointing to the backend storage account.
+Choose DelimitedText for CSV files or JSON for JSON file likewise choose appropriate option as per your backend storage file formate.
+Specify the path for each file.
 
 # 2.2 Configure the Sink:
-        Select Sink in the Copy Data activity settings.
-        Click New to add a dataset pointing to your Data Lake Storage Raw (Bronze) container.
-        Specify the destination paths (e.g., raw/accounts.csv, raw/customers.csv).
+Select Sink in the Copy Data activity settings.
+Click New to add a dataset pointing to your Data Lake Storage Raw (Bronze) container.
+Specify the destination paths (e.g., raw/accounts.csv, raw/customers.csv).
 
   
 	
 
 
 # 2.3 Set Up Parameters (Optional for Dynamic Configurations):
-        Use parameters to define file paths, making your pipeline flexible and easily configurable.
+Use parameters to define file paths, making your pipeline flexible and easily configurable.
 # 2.4 Debug and Publish:
-        Click Debug to test the pipeline.
-        If successful, click Publish All to save your pipeline.
+Click Debug to test the pipeline.
+If successful, click Publish All to save your pipeline.
 	
 
 # Note:
