@@ -1,4 +1,4 @@
-                                                     DATA LAKE PROJECT
+                                                     DATA LAKEHOUSE PROJECT
                                                                                 
 # Overview:
 This project provides a step-by-step guide to create a data pipeline using Azure Data Factory (ADF) for data ingestion, Azure Databricks for data cleaning and transformation.
@@ -424,6 +424,64 @@ Optimize Databricks clusters by selecting appropriate VM sizes and autoscaling o
 
 Use incremental data loads to optimize performance.
 
+# Common Troubleshooting Issues:
+
+# Authentication Failures
+
+Issue: Failing to connect to external services due to authentication issues.
+
+Solution: Verify linked service configurations, especially credentials (e.g., Azure Key Vault secrets, Managed Identity permissions).
+
+# Data Movement Errors
+
+Issue: Data fails to load between stages (e.g., Blob to Databricks or Databricks to Synapse).
+
+Solution: Ensure proper dataset configurations, file paths, and sufficient permissions on storage accounts.
+
+# Pipeline Failures
+
+Issue: Pipeline fails during execution.
+
+Solution: Check the "Monitor" tab for error messages and debug using activity logs.
+
+# Slow Performance
+
+Issue: Pipelines take longer than expected to complete.
+
+Solution: Optimize data partitions, use parallel processing, and adjust Databricks cluster configurations.
+
+# Trigger Misconfigurations
+
+Issue: Scheduled or event-based triggers not firing.
+
+Solution: Verify trigger configurations and ensure "Publish All" is completed.
+
+# Schema Mismatches
+
+Issue: Data format or schema does not match between source and sink.
+
+Solution: Validate schemas during data transformations and ensure compatibility between source and destination.
+
+# Databricks Cluster Issues
+
+Issue: Databricks notebook activity fails due to cluster unavailability.
+
+Solution: Ensure the cluster is running and properly configured with sufficient resources.
+
+# Permission Denied Errors
+
+Issue: Access denied errors when interacting with storage or databases.
+
+Solution: Verify permissions on Azure Storage, Synapse, and other connected resources.
+
+# File Format Errors
+
+Issue: Incorrect file format or delimiter errors.
+
+Solution: Validate the file format and configure the correct file format settings in linked services or external tables.
+
+
+
 
 
 =======================================================================
@@ -548,5 +606,7 @@ Monitor Triggered Pipelines: Use the Monitor section in ADF to check trigger exe
 Parameterize Pipelines: Use parameters to handle dynamic data paths, table names, or other configurations.
 
 ==================================================================================
+
+
 
       
