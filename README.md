@@ -52,11 +52,14 @@ Loading: Transformed data is written into Azure Synapse Analytics.
 
 Automation and Monitoring: Pipelines are automated with triggers and monitored for performance and errors.
 
+      https://www.google.com/url?sa=i&url=https%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fazure%2Farchitecture%2Fsolution-ideas%2Farticles%2Fazure-databricks-modern-analytics-            architecture&psig=AOvVaw0PDJViS7nEHL3jqgskCXP9&ust=1732839710633000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLi2yI_h_YkDFQAAAAAdAAAAABAE
 
 # Step-by-Step Implementation
 # Step 1: Data Ingestion (Backend Storage to Raw(Bronze) Container):
 Data ingestion pipeline is a crucial component of modern data architecture, enabling businesses to efficiently manage and utilize their data. 
 It's the process of importing, transferring, loading, and processing data for later use or storage in a database.
+
+       https://github.com/user-attachments/assets/c35286b0-2e2f-40f4-8ebf-e9dfd3c85fe5
 
 # 1. Configure Azure Data Factory (ADF) for Data Copy
 # 1.1.Sign in to the Azure Portal:
@@ -109,6 +112,7 @@ Drag and drop the Copy Data activity onto the canvas.
 # Step 2: Databricks Activity (Incremental/Delta Processing)
 # 2.1. Set Up Databricks
 Incremental and delta processing in Databricks allows for the processing of data in a way that is more efficient and cost-effective than repeated batch jobs.
+
 Create an Azure Databricks Workspace:
 In the Azure Portal, search for "Azure Databricks" and click "Create".
 Provide the required details and click "Review + Create", then "Create".
@@ -125,6 +129,7 @@ Name the notebook (e.g., Incremental_Processing).
 Choose Language as PySpark.
 Read Data from Raw (Bronze) Container
 
+# Sample code for cleaning
       storage_account_name = "practicestrgacc"
       storage_account_key = "OjW3Dt8+bA9SZR2cFS2jWYJopJRBHmHTo7Rar81b73XKDYs6WY+MW6D69Bxm63AkLUITZ4UnFNqh+AStDgcuxA=="
         
@@ -151,7 +156,8 @@ Read Data from Raw (Bronze) Container
     accounts_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df.csv")
     accounts_df.show(10)
       
-
+# NOTE:
+  This part of the ETL contains only the Cleaning part where the data move from Raw(bronze) container to Processed(silver) container.
     
 # 2.4 Databricks Activity (ETL Processing)
 1. Create Another Databricks Notebook for ETL
@@ -161,8 +167,91 @@ Read Data from Curated (Silver) Container:
 2. Transformation Logic
 Calculate Total Balance for Each Customer:
 3. Save Data to Refined (Gold) Container
+# Sample code for Transformations: 
+
+    storage_account_name = "strgacc2831"
+    storage_account_key = "nK93TB+8Q47M4LiV45af/QN9W01RMS1NJYTe3ITBfE/QetSi7jp2jAtmC/DsNenMGt5aNqGjDBxR+AStA8o5SA=="
+    
+    # Configure Spark to use the storage account key
+    spark.conf.set(f"fs.azure.account.key.strgacc2831.dfs.core.windows.net","nK93TB+8Q47M4LiV45af/QN9W01RMS1NJYTe3ITBfE/QetSi7jp2jAtmC/DsNenMGt5aNqGjDBxR+AStA8o5SA==")
+    
+    # Set up configuration for accessing ADLS with a SAS token
+    spark.conf.set(
+        "fs.azure.sas.silver.strgacc2831.dfs.core.windows.net",
+        "sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-11-08T09:12:09Z&st=2024-11-08T01:12:09Z&spr=https&sig=93v7nCVWLv3xH6v%2Fx5KvVAloWG83JJNJ5vBX9dcA%2Bjw%3D"
+    )
+
+
+    # Assuming both files are in CSV format
+        accounts_df = spark.read.format("csv").option("header", "true").load("abfss://silver@strgacc2831.dfs.core.windows.net/cleaned_accounts.csv/part-00000-tid-1480919646493366281-e08f047d-1733-4059-8af7-      4a1ba5f7a417-42-1-c000.csv")
+        customers_df = spark.read.format("csv").option("header", "true").load("abfss://silver@strgacc2831.dfs.core.windows.net/customers.csv")
+        
+        accounts_df.show(5)
+        customers_df.show(5)
+
+
+      from pyspark.sql import functions as F
+      
+      # Convert balance column to float if necessary
+      accounts_df = accounts_df.withColumn("balance", F.col("balance").cast("float"))
+      
+      # Join customers and accounts DataFrames on customer_id and select specific columns to avoid ambiguity
+      joined_df = customers_df.alias("cust").join(accounts_df.alias("acct"), F.col("cust.customer_id") == F.col("acct.customer_id"), "inner") \
+          .select(
+              F.col("cust.customer_id").alias("customer_id"),
+              "first_name",
+              "last_name",
+              "address",
+              "city",
+              "state",
+              "zip",
+              "account_type",
+              "balance"
+          )
+      
+      # Aggregate to calculate the total balance for each customer
+      result_df = joined_df.groupBy(
+          "customer_id",
+          "first_name",
+          "last_name",
+          "address",
+          "city",
+          "state",
+          "zip",
+          "account_type"
+      ).agg(
+          F.sum("balance").alias("total_balance")
+      )
+      # Display the result
+      result_df.show()
+
+
+    # Write the sorted DataFrame to Azure Data Lake Storage in CSV format
+    result_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://silver@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv")
+
+
+    # Assuming `total_balance_df` is the DataFrame with the aggregated total balances
+      gold_container_path = "abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv"
+      
+      result_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv")
+      
+      result_df.show()
+
+    
+   # NOTE:
+  This part of the ETL contains Transformations and everything according to the business requirement  where the data move from Processed(silver) container to Meta(gold) container.
+
+
+
+
+# Step 4: Azure Synapse Analytics
+
+ Create External Tables in Synapse
+Connect to Synapse Studio and create a  SQL Database in ‘Data’ tab 
+Configure a dedicated SQL pool or use the serverless SQL pool.
+
+    https://github.com/user-attachments/assets/f214ab5a-2326-4549-a153-b1cf52c6871d
+
+
 
    
-
-
-
