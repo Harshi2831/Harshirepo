@@ -52,7 +52,7 @@ Loading: Transformed data is written into Azure Synapse Analytics.
 
 Automation and Monitoring: Pipelines are automated with triggers and monitored for performance and errors.
 
-	![image](https://github.com/user-attachments/assets/538f98e1-fbb4-4f0d-8fa6-0358b297b0e6)
+	https://github.com/user-attachments/assets/538f98e1-fbb4-4f0d-8fa6-0358b297b0e6
 
 
 # Step-by-Step Implementation
