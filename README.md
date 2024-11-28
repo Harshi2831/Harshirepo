@@ -205,7 +205,10 @@ Once created, launch the Databricks workspace.
 # 2.2 Create a Databricks Cluster:
 In the Databricks workspace, go to Clusters > Create Cluster.
 Configure the cluster settings (e.g., name, node types) and create
+  
+	![Screenshot 2024-11-27 224704](https://github.com/user-attachments/assets/c8f94a12-98a4-44ef-aacd-122341fafb33)
 
+    
 # 2.3 Create a Databricks Notebook for Incremental Processing
 Set Up a Notebook:
 In Databricks, click "Create" > "Notebook".
