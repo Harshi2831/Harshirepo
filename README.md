@@ -255,9 +255,11 @@ Configure a dedicated SQL pool or use the serverless SQL pool.
 
 
 Define External Data Sources for Silver container by selecting appropriate database in ‘use database’
+ Create External Data Sources for both the containers.
+ Create External File format for the containers.
 
+Verify whether the data sources, File formate that are created for both the containers in the  Data>workspace.
 
-Verify whether the data sources are created for both the containers in the  Data>workspace.
 Create External Tables in Synapse for both the curated and refined data. Choose the container in Data>linked for which you wanted to create an external table.
 
    Name the external table name a unique table name followed by schema dbo(default schema name).
@@ -266,13 +268,13 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
    
    This allows data analysts and business intelligence teams to access and query the data directly using tools like Synapse Studio or notebooks.
 
-         ![Screenshot 2024-11-11 175516](https://github.com/user-attachments/assets/5e66186f-2c31-4bc2-a40c-874835a29fd3)
-      ![Screenshot 2024-11-11 175217](https://github.com/user-attachments/assets/992433df-da19-4c66-bde9-04464ff143f9)
-      ![Screenshot 2024-11-11 174839](https://github.com/user-attachments/assets/308580b1-1ab9-4d35-9d47-e8a20ada25cf)
-      ![Screenshot 2024-11-11 174811](https://github.com/user-attachments/assets/2cdb75ce-3329-474a-b7df-14eb8a2ba2a3)
-      ![Screenshot 2024-11-11 174517](https://github.com/user-attachments/assets/58bb1928-2f9e-4d3d-91d4-364e3c1d2343)
-      ![Screenshot 2024-11-11 174342](https://github.com/user-attachments/assets/25b36afc-d57e-48bc-a495-394b56e4183f)
-      ![Screenshot 2024-11-11 174126](https://github.com/user-attachments/assets/8884f35a-b690-4a2f-902b-91ff894c684d)
-      ![Screenshot 2024-11-11 174113](https://github.com/user-attachments/assets/65ef78b4-d340-43b1-8096-76d4ee8c6572)
-      ![Screenshot 2024-11-11 173947](https://github.com/user-attachments/assets/2839a95f-6867-4f3f-8f4d-1ec21d807890)
+            ![Screenshot 2024-11-11 175516](https://github.com/user-attachments/assets/9bd029de-accb-456c-95fd-e0ae04b6323a)
+    ![Screenshot 2024-11-11 175217](https://github.com/user-attachments/assets/9c469ef8-ea7d-4d16-9113-6dbf5fe0b455)
+    ![Screenshot 2024-11-11 174839](https://github.com/user-attachments/assets/af6ada9c-e140-4791-8377-9c0cf26cbb7e)
+    ![Screenshot 2024-11-11 174811](https://github.com/user-attachments/assets/a13cac0a-d5dd-423a-9133-aa56ef229466)
+    ![Screenshot 2024-11-11 174517](https://github.com/user-attachments/assets/ef3b43af-d485-4734-b098-4db611661d87)
+    ![Screenshot 2024-11-11 174342](https://github.com/user-attachments/assets/661ad3bf-0827-43c2-8ac0-1776086fd6e3)
+    ![Screenshot 2024-11-11 173947](https://github.com/user-attachments/assets/04031db0-18e0-4ca5-87b5-7af16c46ba77)
+    ![Screenshot 2024-11-11 170651](https://github.com/user-attachments/assets/b8081de4-77c3-4bba-b119-a217ac148687)
+
       
