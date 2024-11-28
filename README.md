@@ -278,6 +278,66 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
     ![Screenshot 2024-11-11 170651](https://github.com/user-attachments/assets/b8081de4-77c3-4bba-b119-a217ac148687)
 
 
+# Configure Triggers for Automation
+
+Schedule Trigger
+
+Set up a trigger to run the pipeline at a specific time interval.
+
+Define start time, recurrence, and end time.
+
+Event Trigger
+
+Set up an event-based trigger to run the pipeline when new files are uploaded to Blob Storage.
+
+# Validate and Run the Pipeline
+
+Debug the Pipeline
+
+Use the "Debug" option in ADF to test the pipeline with sample data.
+
+Publish and Execute
+
+Publish the pipeline and run it manually or via triggers.
+
+Monitor Pipeline Execution
+
+Use the "Monitor" tab in ADF to track execution progress and logs.
+
+# Monitor and Optimize
+
+Logging and Alerts:
+
+Set up alerts for failures and long-running pipelines.
+
+Implement error tracking and retry mechanisms in ADF and Databricks.
+
+Performance Tuning:
+
+Optimize transformations in Databricks and Synapse.
+
+Use partitioning and parallelism for large datasets.
+
+Troubleshooting;:
+
+Use Azure Databricks logs and Spark UI for debugging.
+
+Review pipeline activity logs in Azure Data Factory Monitor.
+
+
+# Best Practices:
+
+Use staging tables in Synapse for intermediate data.
+
+Secure linked services with Managed Identity wherever possible.
+
+Monitor and analyze logs regularly.
+
+Optimize Databricks clusters by selecting appropriate VM sizes and autoscaling options.
+
+Use incremental data loads to optimize performance.
+
+
 
 =======================================================================
 
