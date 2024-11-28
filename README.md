@@ -609,5 +609,73 @@ Parameterize Pipelines: Use parameters to handle dynamic data paths, table names
 ==================================================================================
 
 
+# Dynamic Parameters:
+ Configure parameters in ADF for flexibility, such as file paths and table names.
+
+#Dynamic Parameters Using Trigger in Linked Services:
+
+## Step 1: Define Pipeline Parameters
+
+Go to the pipeline in ADF and create pipeline parameters by clicking on the "Parameters" tab.
+
+Example:
+
+   filePath for dynamic file paths.
+
+   tableName for dynamic database table names.
+
+## Step 2: Pass Parameters to Activities
+
+Use the @pipeline().parameters.parameterName syntax in activity settings (e.g., in a Copy Data activity source or sink).
+		
+		Example:
+		
+		"source": {
+		  "type": "AzureBlobStorage",
+		  "filePath": "@{pipeline().parameters.filePath}"
+		}
+
+## Step 3: Configure Trigger Parameters
+
+Go to the "Triggers" section and create or edit a trigger.
+
+Add parameters in the trigger definition and map them to the pipeline parameters.
+
+		Example:
+		
+		"type": "Trigger",
+		"pipeline": {
+		  "parameters": {
+		    "filePath": "path/to/new/file.csv",
+		    "tableName": "NewTable"
+		  }
+		}
+		
+## Step 4: Use Parameters in Linked Services
+		
+Configure linked services (e.g., Azure Blob Storage, Azure SQL) to accept dynamic inputs.
+		
+Use the @{linkedService().parameterName} syntax to pass values dynamically.
+		
+		Example for a Blob Storage linked service:
+		
+		{
+		  "type": "AzureBlobStorage",
+		  "typeProperties": {
+		    "connectionString": "@{linkedService().connectionString}",
+		    "filePath": "@{pipeline().parameters.filePath}"
+		  }
+		}
+
+## Step 5: Publish and Test
+
+Publish the pipeline and trigger.
+
+Test by running the trigger and verify that dynamic parameters are passed correctly to activities and linked services.
+
+============================================================================================
+
+
+
 
       
