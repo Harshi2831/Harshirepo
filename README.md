@@ -247,7 +247,7 @@ Calculate Total Balance for Each Customer:
 
 # Step 4: Azure Synapse Analytics
 
- Create External Tables in Synapse
+# Create External Tables in Synapse:
 Connect to Synapse Studio and create a  SQL Database in ‘Data’ tab 
 Configure a dedicated SQL pool or use the serverless SQL pool.
 
@@ -276,5 +276,10 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
     ![Screenshot 2024-11-11 174342](https://github.com/user-attachments/assets/661ad3bf-0827-43c2-8ac0-1776086fd6e3)
     ![Screenshot 2024-11-11 173947](https://github.com/user-attachments/assets/04031db0-18e0-4ca5-87b5-7af16c46ba77)
     ![Screenshot 2024-11-11 170651](https://github.com/user-attachments/assets/b8081de4-77c3-4bba-b119-a217ac148687)
+
+
+    
+
+
 
       
