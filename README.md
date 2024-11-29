@@ -243,6 +243,8 @@ Read Data from Raw (Bronze) Container
 
     accounts_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df.csv")
     accounts_df.show(10)
+
+screenshots:
       
 # NOTE:
   This part of the ETL contains only the Cleaning part where the data move from Raw(bronze) container to Processed(silver) container.
@@ -364,6 +366,9 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
     ![Screenshot 2024-11-11 174342](https://github.com/user-attachments/assets/661ad3bf-0827-43c2-8ac0-1776086fd6e3)
     ![Screenshot 2024-11-11 173947](https://github.com/user-attachments/assets/04031db0-18e0-4ca5-87b5-7af16c46ba77)
     ![Screenshot 2024-11-11 170651](https://github.com/user-attachments/assets/b8081de4-77c3-4bba-b119-a217ac148687)
+
+
+    ==============================================================================================
 
 
 # Configure Triggers for Automation
@@ -558,7 +563,7 @@ Service principal id and object id are same, you can find it in the overview pag
 
 
 
-=========================================================================
+==================================================================================
   
  # Creating Triggers for a Pipline in Data Factory.
 To create a trigger for your pipeline in Azure Data Factory, follow these steps:
@@ -607,6 +612,74 @@ Provide any parameters required for the pipeline.
 
 # Publish the Trigger:
 Save and Publish All to enable the trigger.
+
+# Dynamic Parameters Using Trigger in Linked Services
+Step 1: Define Pipeline Parameters
+
+Go to the pipeline in ADF and create pipeline parameters by clicking on the "Parameters" tab.
+Example:
+filePath for dynamic file paths.
+tableName for dynamic database table names.
+Step 2: Pass Parameters to Activities
+
+Use the @pipeline().parameters.parameterName syntax in activity settings (e.g., in a Copy Data activity source or sink).
+Example:
+json
+Copy code
+"source": {
+  "type": "AzureBlobStorage",
+  "filePath": "@{pipeline().parameters.filePath}"
+}
+Step 3: Configure Trigger Parameters
+
+Go to the "Triggers" section and create or edit a trigger.
+Add parameters in the trigger definition and map them to the pipeline parameters.
+Example:
+json
+
+				{
+				  "name": "trigger1",
+				  "properties": {
+				    "annotations": [],
+				    "runtimeState": "Stopped",
+				    "pipelines": [
+					{
+					"pipelineReference": {
+				          "referenceName": "pipeline1",
+				          "type": "PipelineReference"
+				        }
+				      }	
+				    ],
+				    "type": "ScheduleTrigger",
+				    "typeProperties": {
+				      "recurrence": {
+				        "frequency": "Day",
+				        "interval": 15,
+				        "startTime": "2024-11-23T07:13:00",
+				        "timeZone": "Eastern Standard Time"
+				      }
+				    }
+				  }
+				}
+Step 4: Use Parameters in Linked Services
+
+Configure linked services (e.g., Azure Blob Storage, Azure SQL) to accept dynamic inputs.
+Use the @{linkedService().parameterName} syntax to pass values dynamically.
+Example for a Blob Storage linked service:
+json
+
+	{
+	  "type": "AzureBlobStorage",
+	  "typeProperties": {
+	    "connectionString": "@{linkedService().connectionString}",
+	    "filePath": "@{pipeline().parameters.filePath}"
+	  }
+	}
+Step 5: Publish and Test
+
+Publish the pipeline and trigger.
+Test by running the trigger and verify that dynamic parameters are passed correctly to activities and linked services.
+
 
 # Best Practices for Triggers
 Use Descriptive Names: Name triggers clearly to identify their purpose.
