@@ -178,6 +178,21 @@ Specify the destination paths (e.g., raw/accounts.csv, raw/customers.csv).
 
 # 2.3 Set Up Parameters (Optional for Dynamic Configurations):
 Use parameters to define file paths, making your pipeline flexible and easily configurable.
+After adding source and sink linked services,add parameters for both of them as shown in the screenshot below.
+
+
+Go to “Additional Headers” and choose Dynamic content to add @pipeline().parameters.source by choosing source parameter and test the connection. Repeat the same process in sink for sink parameters 
+
+
+
+Debug and Publish:
+Click Debug to test the pipeline.
+If successful, click Publish All to save your pipeline.
+
+Now add Trigger for the pipeline.
+
+
+
 # 2.4 Debug and Publish:
 Click Debug to test the pipeline.
 If successful, click Publish All to save your pipeline.
@@ -327,6 +342,12 @@ Calculate Total Balance for Each Customer:
       
       result_df.show()
 
+ 	
+		![Screenshot 2024-11-11 165438](https://github.com/user-attachments/assets/10ab686d-deb0-4394-90ce-dc94d0be9979)
+		![Screenshot 2024-11-11 165130](https://github.com/user-attachments/assets/f202a476-5635-4a07-862f-1b3e1f906222)
+		![Screenshot 2024-11-11 165035](https://github.com/user-attachments/assets/4e7ccbe3-b108-44bb-a033-921d6d8d5971)
+		![Screenshot 2024-11-11 164954](https://github.com/user-attachments/assets/fcc93547-5f39-46e7-a4f7-671cdeddc72c)
+
     
    # NOTE:
   This part of the ETL contains Transformations and everything according to the business requirement  where the data move from Processed(silver) container to Meta(gold) container.
@@ -358,7 +379,7 @@ Create External Tables in Synapse for both the curated and refined data. Choose 
    
    This allows data analysts and business intelligence teams to access and query the data directly using tools like Synapse Studio or notebooks.
 
-            ![Screenshot 2024-11-11 175516](https://github.com/user-attachments/assets/9bd029de-accb-456c-95fd-e0ae04b6323a)
+	![Screenshot 2024-11-11 175516](https://github.com/user-attachments/assets/9bd029de-accb-456c-95fd-e0ae04b6323a)
     ![Screenshot 2024-11-11 175217](https://github.com/user-attachments/assets/9c469ef8-ea7d-4d16-9113-6dbf5fe0b455)
     ![Screenshot 2024-11-11 174839](https://github.com/user-attachments/assets/af6ada9c-e140-4791-8377-9c0cf26cbb7e)
     ![Screenshot 2024-11-11 174811](https://github.com/user-attachments/assets/a13cac0a-d5dd-423a-9133-aa56ef229466)
