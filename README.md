@@ -676,6 +676,143 @@ Test by running the trigger and verify that dynamic parameters are passed correc
 ============================================================================================
 
 
+Azure Data Factory - Git Configuration
+Create Resource Group:
+Step 1: Create resource group : “practicegrp1”
+Create Storage Account:
+Step 2: Storage account name: “practicestorage1”
+● Enable Hierarchical name space: “Yes”
+● Create Container : “my-container”
+● In “my-container” Upload a sample file.
+Create SQL database:
+Step 3: Basic:
+● sql database name: “mysqldatabase”
+● Server: create : create new : “db1”
+● Authentication method: “SQL Authetication”
+● Server admin login: “myserverlog”
+● Password: ***********
+● Workload environment: “Production”
+● Compute + storage: Service tier : basic(for less demanding workloads)
+● Data Max size : “0” - Apply
+● Backup storage redundancy: “Locally-redundant backup storage”
+● Networking: Connectivity method: “Public endpoint”
+● Allow Azure services and resources to access this server: “yes”
+● Add current client IP address: “Yes”
+● Additional settings: “Sample”
+● Review+create
+● Create
+Create Repository in GitHub
+Step 4: Login to Git-hub
+● Repository name: “ADF-Key”
+● Copy the set up link and past it in sticky notes - refer screenshot
+● Create a REAdme file
+Create Azure Data Factory
+Step 5: Resource group name: “practicegrp1”
+● Data Factory name: “adfpractice”
+● Region: “Central US”
+● Git Configuration : Yes
+● Review+create
+● Create - Launch Studio
+Step 6: Select - Manage
+● Select - Git Configuration - Configure
+● Repository type : “GitHub”
+● GitHub repository owner: “Harshi2831” refer screenshot
+● It will ask for login details email & password - Once logged in
+● Repository name: “Harshi2831”
+● Collaboration branch: create new : “Dev” or you can also keep the existing one which is “Main” or
+you can also create a new branch.
+● Cross check that the Dev branch is created in GitHub.
+Create Azure Key - Vault
+Step 7: Basics:
+● Select resource group: “practicegrp1”
+● Key vault name: “myvault2831”
+● Region: “Central US”
+● Access Configuration:
+● Permission model - select : Vault access policy
+● Access policies - check the box “Name”
+● Access policies - select “create”
+● In permissions : under “Secret permissions” check the box “select all”
+● In principle: Type the name of the Azure Data Factory: “factorydata2831”
+● Applications (No change)
+● Review + Create - Create
+● Select : objects - Secrets
+● + Generate/Import
+● Secret Name: “mysecret”
+● Secret value: its secret (act as password)
+● Create
+Step 8: Go to Azure Data Factory - Manage - Linked service: + New
+● SQL Database
+● Name: “AzureSqlDatabase1” (keeping the same/ Also we can rename it)
+● Server name: “server2831” (select from dropdown the one which is create at creation of sql
+database) Reg step 3
+● Database name: “mydb1” (select from dropdown the one which is create at creation of
+sql database) Reg step 3
+● User name: “bellamkonda”
+● Password : Select Azure Key Vault
+● AKV linked service: Select new
+● Name: “”
+● Azure key vault name: “myvault2831”(select from drop down)
+● Test Connection - Create
+● Secret name: “mysecret” (select from drop down) Also available in key vault page - objects -
+Secrets )
+● Secret Version: current version
+● Test connection
+Step 9: Go to Azure Data Factory - Manage - Linked service: + New
+● Azure Data Lake Storage
+● Name: “AzureDataLakeStorage1” (keeping the same/ Also we can rename it)
+● Authentication type: “Account Key”
+● Storage account name: “practicestracc”
+● Account selection method - Azure key Vault
+● AKV linked service: “ls_keyv1”
+● Secret name: “mysecret”
+● Secret Version: Current version.
+● Test connection
+● Create.
+Step 10: In Azure data factory - Author - Data sets - New data Sets
+● SQL Database
+● Name: AzureSqlTable1 (keeping the same/ Also we can rename it)
+● Linked service: “AzureSQLDatabase1” (select from dropdown)
+● Table name: Select sample table
+● Ok
+● Data sets - New data Sets
+● Azure Data Lake Storage - CSV file format
+● Name: DelimitedText1 ( (keeping the same/ Also we can rename it)
+● Linked service: “AzureDataLakeStorage1” (select from dropdown)
+● File path: “my-container”
+● Ok
+Step 11: In Azure data Factory - Author - Pipeline - new pipeline
+● Copy data - Drag and Drop
+● Source - “AzureSqlTable1” (select from drop down)
+● Sink - “DelimitedText1” (select from drop down)
+● Mapping - Import schema ( Do necessary changes)
+● Publish all
+● Validate
+● Debug
+Step 12: Go to GitHub - Cross check in Dev branch that all the pipeline, linked services are reflecting or
+not.
+Step 13: In Azure Portal
+● Create new Resource group
+● Resource group name: “practicegrp1”
+Step 14: Create New Data factory
+● Data Factory Name: “adfqa”
+● Once created - Launch studio
+● Manage - Git configuration - Configure
+● Repository type : “GitHub”
+● GitHub repository owner: “Harshi2831”
+● Repository name: “Harshi2831”
+● Collaboration branch: create new : “QA”
+Step 15: Go to GitHub:
+● Go to Repository “Harshi2831”- Settings
+● Branches - Add Branch protection rules
+● Add rules - Check the boxes of
+● 1. Require a pull request before merging
+● 2. Require status checks to pass before merging
+● Create
+● Select - Pull Request
+● New Pull request
+● Base: QA
+● Compare: Dev
+● Cross check that the QA branch is created in GitHub.
 
 
       
