@@ -509,6 +509,11 @@ Select : objects - Secrets
 Secret Name: “mysecret”
 Secret value: (act as password)
 Create
+  
+			![Screenshot 2024-11-29 122025](https://github.com/user-attachments/assets/07874e08-a7d9-4dc6-a8d1-796c350f9fbd)
+		
+		  	![Screenshot 2024-11-29 115752](https://github.com/user-attachments/assets/0392e8ac-7ab6-4baf-a8c1-699ebdf163bc)
+
 ==========================================================
 
 # How to create Service principal:
@@ -544,6 +549,9 @@ Go to Access Control (IAM) and click on Add role assignment.
 Select the appropriate role (e.g., Contributor, Reader, or Key Vault Secrets Officer).
 Under Assign access to, choose User, group, or service principal.
 Search for the name of your newly created app registration (the service principal), select it, and click Save.
+
+		![Screenshot 2024-11-14 143326](https://github.com/user-attachments/assets/e712eaf0-46e8-4fb7-a436-306fd527935b)
+
 
 # Note:
 Service principal id and object id are same, you can find it in the overview page of it.
@@ -676,16 +684,19 @@ Test by running the trigger and verify that dynamic parameters are passed correc
 ============================================================================================
 
 
-Azure Data Factory - Git Configuration
+# Azure Data Factory - Git Configuration
 Create Resource Group:
-Step 1: Create resource group : “practicegrp1”
+# Step 1: 
+Create resource group : “practicegrp1”
 Create Storage Account:
-Step 2: Storage account name: “practicestorage1”
+# Step 2:
+Storage account name: “practicestorage1”
 ● Enable Hierarchical name space: “Yes”
 ● Create Container : “my-container”
 ● In “my-container” Upload a sample file.
 Create SQL database:
-Step 3: Basic:
+# Step 3:
+Basic:
 ● sql database name: “mysqldatabase”
 ● Server: create : create new : “db1”
 ● Authentication method: “SQL Authetication”
@@ -702,18 +713,21 @@ Step 3: Basic:
 ● Review+create
 ● Create
 Create Repository in GitHub
-Step 4: Login to Git-hub
+# Step 4:
+Login to Git-hub
 ● Repository name: “ADF-Key”
 ● Copy the set up link and past it in sticky notes - refer screenshot
 ● Create a REAdme file
 Create Azure Data Factory
-Step 5: Resource group name: “practicegrp1”
+# Step 5:
+Resource group name: “practicegrp1”
 ● Data Factory name: “adfpractice”
 ● Region: “Central US”
 ● Git Configuration : Yes
 ● Review+create
 ● Create - Launch Studio
-Step 6: Select - Manage
+# Step 6: 
+Select - Manage
 ● Select - Git Configuration - Configure
 ● Repository type : “GitHub”
 ● GitHub repository owner: “Harshi2831” refer screenshot
@@ -723,7 +737,8 @@ Step 6: Select - Manage
 you can also create a new branch.
 ● Cross check that the Dev branch is created in GitHub.
 Create Azure Key - Vault
-Step 7: Basics:
+# Step 7:
+Basics:
 ● Select resource group: “practicegrp1”
 ● Key vault name: “myvault2831”
 ● Region: “Central US”
@@ -740,7 +755,8 @@ Step 7: Basics:
 ● Secret Name: “mysecret”
 ● Secret value: its secret (act as password)
 ● Create
-Step 8: Go to Azure Data Factory - Manage - Linked service: + New
+# Step 8:
+Go to Azure Data Factory - Manage - Linked service: + New
 ● SQL Database
 ● Name: “AzureSqlDatabase1” (keeping the same/ Also we can rename it)
 ● Server name: “server2831” (select from dropdown the one which is create at creation of sql
@@ -757,7 +773,8 @@ sql database) Reg step 3
 Secrets )
 ● Secret Version: current version
 ● Test connection
-Step 9: Go to Azure Data Factory - Manage - Linked service: + New
+# Step 9:
+Go to Azure Data Factory - Manage - Linked service: + New
 ● Azure Data Lake Storage
 ● Name: “AzureDataLakeStorage1” (keeping the same/ Also we can rename it)
 ● Authentication type: “Account Key”
@@ -768,7 +785,8 @@ Step 9: Go to Azure Data Factory - Manage - Linked service: + New
 ● Secret Version: Current version.
 ● Test connection
 ● Create.
-Step 10: In Azure data factory - Author - Data sets - New data Sets
+# Step 10:
+In Azure data factory - Author - Data sets - New data Sets
 ● SQL Database
 ● Name: AzureSqlTable1 (keeping the same/ Also we can rename it)
 ● Linked service: “AzureSQLDatabase1” (select from dropdown)
@@ -780,7 +798,8 @@ Step 10: In Azure data factory - Author - Data sets - New data Sets
 ● Linked service: “AzureDataLakeStorage1” (select from dropdown)
 ● File path: “my-container”
 ● Ok
-Step 11: In Azure data Factory - Author - Pipeline - new pipeline
+# Step 11:
+In Azure data Factory - Author - Pipeline - new pipeline
 ● Copy data - Drag and Drop
 ● Source - “AzureSqlTable1” (select from drop down)
 ● Sink - “DelimitedText1” (select from drop down)
@@ -788,12 +807,13 @@ Step 11: In Azure data Factory - Author - Pipeline - new pipeline
 ● Publish all
 ● Validate
 ● Debug
-Step 12: Go to GitHub - Cross check in Dev branch that all the pipeline, linked services are reflecting or
-not.
-Step 13: In Azure Portal
+# Step 12: 
+Go to GitHub - Cross check in Dev branch that all the pipeline, linked services are reflecting or not.
+# Step 13: 
+In Azure Portal
 ● Create new Resource group
 ● Resource group name: “practicegrp1”
-Step 14: Create New Data factory
+# Step 14: Create New Data factory
 ● Data Factory Name: “adfqa”
 ● Once created - Launch studio
 ● Manage - Git configuration - Configure
@@ -801,7 +821,7 @@ Step 14: Create New Data factory
 ● GitHub repository owner: “Harshi2831”
 ● Repository name: “Harshi2831”
 ● Collaboration branch: create new : “QA”
-Step 15: Go to GitHub:
+# Step 15:Go to GitHub:
 ● Go to Repository “Harshi2831”- Settings
 ● Branches - Add Branch protection rules
 ● Add rules - Check the boxes of
@@ -814,5 +834,14 @@ Step 15: Go to GitHub:
 ● Compare: Dev
 ● Cross check that the QA branch is created in GitHub.
 
+		
+		![Screenshot 2024-11-29 123249](https://github.com/user-attachments/assets/286a103d-36f2-4bcb-8f93-43b6a7c9cecb)
+		![Screenshot 2024-11-29 123230](https://github.com/user-attachments/assets/55aad6ad-2ce8-409b-8edb-a5b78711b515)
+		![Screenshot 2024-11-29 123149](https://github.com/user-attachments/assets/2edf3085-7dae-46d5-b0b6-92f13c2a6cff)
+		![Screenshot 2024-11-29 123108](https://github.com/user-attachments/assets/a6c183b6-5577-4e88-97ad-5f115761229d)
+		![Screenshot 2024-11-29 122918](https://github.com/user-attachments/assets/be6e4343-b434-4103-b5af-2012c9017fdd)
+		![Screenshot 2024-11-29 122902](https://github.com/user-attachments/assets/6f464997-5c65-4207-9e6c-4805ac16226d)
+		![Screenshot 2024-11-29 122721](https://github.com/user-attachments/assets/cac2cb74-4db3-49ff-aed6-7966db29cb01)
+		![Screenshot 2024-11-29 122654](https://github.com/user-attachments/assets/96426499-4fb9-4975-a77a-21f8410830f8)
+		![Screenshot 2024-11-29 122640](https://github.com/user-attachments/assets/2667292c-45a5-42ad-97bb-e2d96774c6fa)
 
-      
