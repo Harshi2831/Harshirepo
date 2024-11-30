@@ -994,6 +994,14 @@ When querying the data, SQL Server will automatically prune irrelevant partition
 
 		SELECT * FROM sales WHERE sale_date BETWEEN '2021-01-01' AND '2021-12-31';
 
+
+	SELECT YEAR(sale_date) AS year, SUM(amount) AS total_sales
+		FROM sales
+		GROUP BY YEAR(sale_date)
+		ORDER BY year;
+![Screenshot 2024-11-29 193130](https://github.com/user-attachments/assets/c2dc8a8c-d35f-4d7b-8742-b8f75f9cb80e)
+
+
 # Azure Synapse Analytics: If you're working with Azure Synapse Analytics instead of Azure SQL Database, you can use DISTRIBUTION and PARTITION strategies natively, which are different from this approach.
 Partition Management: You can update or modify the partition function and scheme to handle new ranges as your data grows (e.g., adding new years).
 
