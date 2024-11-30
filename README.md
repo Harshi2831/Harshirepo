@@ -938,4 +938,62 @@ In Azure Portal
 		![Screenshot 2024-11-29 122721](https://github.com/user-attachments/assets/cac2cb74-4db3-49ff-aed6-7966db29cb01)
 		![Screenshot 2024-11-29 122654](https://github.com/user-attachments/assets/96426499-4fb9-4975-a77a-21f8410830f8)
 		![Screenshot 2024-11-29 122640](https://github.com/user-attachments/assets/2667292c-45a5-42ad-97bb-e2d96774c6fa)
+==============================================================================================
+
+# Range Partioning technique in Azure SQl Database
+
+# Step 1: Create a Partition Function
+The partition function defines the range boundaries for partitioning.
+
+
+		CREATE PARTITION FUNCTION sales_partition_function (DATE)
+		AS RANGE RIGHT FOR VALUES ('2021-01-01', '2022-01-01', '2023-01-01');
+RANGE RIGHT means each range includes the boundary value.
+For example:
+
+Partition 1: All rows with sale_date < '2021-01-01'
+Partition 2: All rows with sale_date >= '2021-01-01' and < '2022-01-01'
+Partition 3: All rows with sale_date >= '2022-01-01' and < '2023-01-01'
+  
+# Step 2: Create a Partition Scheme
+The partition scheme maps the partition function to specific filegroups. For simplicity, we can map all partitions to the PRIMARY filegroup.
+
+
+		CREATE PARTITION SCHEME sales_partition_scheme
+		AS PARTITION sales_partition_function ALL TO ([PRIMARY]);
+  
+# Step 3: Create the Partitioned Table
+Now, create the table using the partition scheme and define which column (sale_date) should be partitioned.
+
+
+		CREATE TABLE sales (
+		    id INT PRIMARY KEY,
+		    amount DECIMAL(10, 2),
+		    sale_date DATE
+		)
+		ON sales_partition_scheme (sale_date);
+# Step 4: Insert Sample Data
+Insert data into the table as usual. The database will automatically place the rows into the appropriate partitions based on the sale_date.
+
+
+		INSERT INTO sales (id, amount, sale_date) 
+		VALUES 
+		    (1, 100.50, '2020-01-15'),
+		    (2, 250.00, '2020-06-20'),
+		    (3, 175.75, '2020-12-05'),
+		    (4, 300.20, '2021-02-14'),
+		    (5, 450.10, '2021-07-21'),
+		    (6, 500.00, '2021-11-30'),
+		    (7, 325.35, '2022-03-25'),
+		    (8, 700.80, '2022-08-15'),
+		    (9, 150.45, '2023-04-10'),
+		    (10, 800.25, '2023-09-05');
+# Step 5: Query the Partitioned Table
+When querying the data, SQL Server will automatically prune irrelevant partitions, improving query performance.
+-- Retrieve data for 2021
+
+		SELECT * FROM sales WHERE sale_date BETWEEN '2021-01-01' AND '2021-12-31';
+
+# Azure Synapse Analytics: If you're working with Azure Synapse Analytics instead of Azure SQL Database, you can use DISTRIBUTION and PARTITION strategies natively, which are different from this approach.
+Partition Management: You can update or modify the partition function and scheme to handle new ranges as your data grows (e.g., adding new years).
 
