@@ -776,158 +776,36 @@ Publish the pipeline and trigger.
 Test by running the trigger and verify that dynamic parameters are passed correctly to activities and linked services.
 
 ============================================================================================
+# GitHub Integration
 
+Integrating GitHub with Azure enhances your development workflow by enabling seamless code management, continuous integration, and deployment. Here are several approaches to achieve this integration:
 
-# Azure Data Factory - Git Configuration
-Create Resource Group:
-# Step 1: 
-Create resource group : “practicegrp1”
-Create Storage Account:
-# Step 2:
-Storage account name: “practicestorage1”
-● Enable Hierarchical name space: “Yes”
-● Create Container : “my-container”
-● In “my-container” Upload a sample file.
-Create SQL database:
-# Step 3:
-Basic:
-● sql database name: “mysqldatabase”
-● Server: create : create new : “db1”
-● Authentication method: “SQL Authetication”
-● Server admin login: “myserverlog”
-● Password: ***********
-● Workload environment: “Production”
-● Compute + storage: Service tier : basic(for less demanding workloads)
-● Data Max size : “0” - Apply
-● Backup storage redundancy: “Locally-redundant backup storage”
-● Networking: Connectivity method: “Public endpoint”
-● Allow Azure services and resources to access this server: “yes”
-● Add current client IP address: “Yes”
-● Additional settings: “Sample”
-● Review+create
-● Create
-Create Repository in GitHub
-# Step 4:
-Login to Git-hub
-● Repository name: “ADF-Key”
-● Copy the set up link and past it in sticky notes - refer screenshot
-● Create a REAdme file
-Create Azure Data Factory
-# Step 5:
-Resource group name: “practicegrp1”
-● Data Factory name: “adfpractice”
-● Region: “Central US”
-● Git Configuration : Yes
-● Review+create
-● Create - Launch Studio
-# Step 6: 
-Select - Manage
-● Select - Git Configuration - Configure
-● Repository type : “GitHub”
-● GitHub repository owner: “Harshi2831” refer screenshot
-● It will ask for login details email & password - Once logged in
-● Repository name: “Harshi2831”
-● Collaboration branch: create new : “Dev” or you can also keep the existing one which is “Main” or
-you can also create a new branch.
-● Cross check that the Dev branch is created in GitHub.
-Create Azure Key - Vault
-# Step 7:
-Basics:
-● Select resource group: “practicegrp1”
-● Key vault name: “myvault2831”
-● Region: “Central US”
-● Access Configuration:
-● Permission model - select : Vault access policy
-● Access policies - check the box “Name”
-● Access policies - select “create”
-● In permissions : under “Secret permissions” check the box “select all”
-● In principle: Type the name of the Azure Data Factory: “factorydata2831”
-● Applications (No change)
-● Review + Create - Create
-● Select : objects - Secrets
-● + Generate/Import
-● Secret Name: “mysecret”
-● Secret value: its secret (act as password)
-● Create
-# Step 8:
-Go to Azure Data Factory - Manage - Linked service: + New
-● SQL Database
-● Name: “AzureSqlDatabase1” (keeping the same/ Also we can rename it)
-● Server name: “server2831” (select from dropdown the one which is create at creation of sql
-database) Reg step 3
-● Database name: “mydb1” (select from dropdown the one which is create at creation of
-sql database) Reg step 3
-● User name: “bellamkonda”
-● Password : Select Azure Key Vault
-● AKV linked service: Select new
-● Name: “”
-● Azure key vault name: “myvault2831”(select from drop down)
-● Test Connection - Create
-● Secret name: “mysecret” (select from drop down) Also available in key vault page - objects -
-Secrets )
-● Secret Version: current version
-● Test connection
-# Step 9:
-Go to Azure Data Factory - Manage - Linked service: + New
-● Azure Data Lake Storage
-● Name: “AzureDataLakeStorage1” (keeping the same/ Also we can rename it)
-● Authentication type: “Account Key”
-● Storage account name: “practicestracc”
-● Account selection method - Azure key Vault
-● AKV linked service: “ls_keyv1”
-● Secret name: “mysecret”
-● Secret Version: Current version.
-● Test connection
-● Create.
-# Step 10:
-In Azure data factory - Author - Data sets - New data Sets
-● SQL Database
-● Name: AzureSqlTable1 (keeping the same/ Also we can rename it)
-● Linked service: “AzureSQLDatabase1” (select from dropdown)
-● Table name: Select sample table
-● Ok
-● Data sets - New data Sets
-● Azure Data Lake Storage - CSV file format
-● Name: DelimitedText1 ( (keeping the same/ Also we can rename it)
-● Linked service: “AzureDataLakeStorage1” (select from dropdown)
-● File path: “my-container”
-● Ok
-# Step 11:
-In Azure data Factory - Author - Pipeline - new pipeline
-● Copy data - Drag and Drop
-● Source - “AzureSqlTable1” (select from drop down)
-● Sink - “DelimitedText1” (select from drop down)
-● Mapping - Import schema ( Do necessary changes)
-● Publish all
-● Validate
-● Debug
-# Step 12: 
-Go to GitHub - Cross check in Dev branch that all the pipeline, linked services are reflecting or not.
-# Step 13: 
-In Azure Portal
-● Create new Resource group
-● Resource group name: “practicegrp1”
-# Step 14: Create New Data factory
-● Data Factory Name: “adfqa”
-● Once created - Launch studio
-● Manage - Git configuration - Configure
-● Repository type : “GitHub”
-● GitHub repository owner: “Harshi2831”
-● Repository name: “Harshi2831”
-● Collaboration branch: create new : “QA”
-# Step 15:Go to GitHub:
-● Go to Repository “Harshi2831”- Settings
-● Branches - Add Branch protection rules
-● Add rules - Check the boxes of
-● 1. Require a pull request before merging
-● 2. Require status checks to pass before merging
-● Create
-● Select - Pull Request
-● New Pull request
-● Base: QA
-● Compare: Dev
-● Cross check that the QA branch is created in GitHub.
+# 1. GitHub Actions for Azure
 
+GitHub Actions allows you to automate your software workflows directly from your GitHub repository. By utilizing GitHub Actions for Azure, you can build, test, package, release, and deploy applications to Azure services. This integration facilitates a streamlined code-to-cloud automation process. 
+MICROSOFT LEARN
+
+# 2. Azure Pipelines Integration
+
+Azure Pipelines, a component of Azure DevOps, provides robust continuous integration and continuous deployment (CI/CD) capabilities. By connecting your GitHub repository to Azure Pipelines, you can automate builds and deployments, ensuring that code changes are consistently tested and delivered. This setup supports various project types and platforms, offering flexibility in deployment targets. 
+MICROSOFT LEARN
+
+# 3. Azure Boards and GitHub Integration
+
+Azure Boards offers tools for planning, tracking, and discussing work across teams. Integrating Azure Boards with GitHub repositories enables linking of GitHub commits, pull requests, branches, and issues to work items. This connection provides end-to-end traceability and enhances project management capabilities. 
+MICROSOFT LEARN
+
+# 4. Direct Deployment from GitHub to Azure
+
+Azure services like App Service and Azure Functions support direct deployment from GitHub repositories. By configuring continuous deployment, any changes pushed to your GitHub repository automatically deploy to the specified Azure service, facilitating rapid and consistent updates to your applications. 
+MICROSOFT LEARN
+
+# 5. Azure DevOps and GitHub Integration
+
+Azure DevOps provides a suite of development tools that integrate with GitHub. By connecting Azure DevOps with your GitHub account, you can utilize Azure Pipelines for CI/CD, Azure Boards for work tracking, and other Azure DevOps services in conjunction with your GitHub repositories. This integration enhances collaboration and streamlines the development process. 
+MICROSOFT DEVELOPER BLOGS
+
+Each of these integration methods offers unique benefits, allowing you to choose the approach that best fits your project's requirements and workflow preferences.
 		
 		![Screenshot 2024-11-29 123249](https://github.com/user-attachments/assets/286a103d-36f2-4bcb-8f93-43b6a7c9cecb)
 		![Screenshot 2024-11-29 123230](https://github.com/user-attachments/assets/55aad6ad-2ce8-409b-8edb-a5b78711b515)
@@ -938,6 +816,7 @@ In Azure Portal
 		![Screenshot 2024-11-29 122721](https://github.com/user-attachments/assets/cac2cb74-4db3-49ff-aed6-7966db29cb01)
 		![Screenshot 2024-11-29 122654](https://github.com/user-attachments/assets/96426499-4fb9-4975-a77a-21f8410830f8)
 		![Screenshot 2024-11-29 122640](https://github.com/user-attachments/assets/2667292c-45a5-42ad-97bb-e2d96774c6fa)
+  
 ==============================================================================================
 
 # Range Partioning technique in Azure SQl Database
@@ -1002,6 +881,10 @@ When querying the data, SQL Server will automatically prune irrelevant partition
 ![Screenshot 2024-11-29 193130](https://github.com/user-attachments/assets/c2dc8a8c-d35f-4d7b-8742-b8f75f9cb80e)
 
 
-# Azure Synapse Analytics: If you're working with Azure Synapse Analytics instead of Azure SQL Database, you can use DISTRIBUTION and PARTITION strategies natively, which are different from this approach.
+# Azure Synapse Analytics: 
+If you're working with Azure Synapse Analytics instead of Azure SQL Database, you can use DISTRIBUTION and PARTITION strategies natively, which are different from this approach.
 Partition Management: You can update or modify the partition function and scheme to handle new ranges as your data grows (e.g., adding new years).
+
+========================================================================================================================
+
 
