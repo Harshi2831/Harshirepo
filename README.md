@@ -256,7 +256,7 @@ Read Data from Raw (Bronze) Container
       accounts_df = accounts_df.dropDuplicates(["account_id"])
       accounts_df.show(10)
 
-    accounts_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df.csv")
+    accounts_df.write.format("parquet").mode("append").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df")
     accounts_df.show(10)
 
 screenshots:
@@ -331,14 +331,14 @@ Calculate Total Balance for Each Customer:
       result_df.show()
 
 
-    # Write the sorted DataFrame to Azure Data Lake Storage in CSV format
-    result_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://silver@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv")
+    # Write the sorted DataFrame to Azure Data Lake Storage 
+    result_df.write.format("parquet").mode("overwrite").save("abfss://silver@strgacc2831.dfs.core.windows.net/total_balance_per_customer")
 
 
     # Assuming `total_balance_df` is the DataFrame with the aggregated total balances
-      gold_container_path = "abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv"
+      gold_container_path = "abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer"
       
-      result_df.write.format("csv").mode("overwrite").option("header", "true").save("abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer.csv")
+      result_df.write.format("parquet").mode("overwrite").save("abfss://gold@strgacc2831.dfs.core.windows.net/total_balance_per_customer")
       
       result_df.show()
 
