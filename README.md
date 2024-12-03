@@ -56,7 +56,7 @@ Automation and Monitoring: Pipelines are automated with triggers and monitored f
 
 
 # Step-by-Step Implementation
-# Step 1: Data Ingestion (Backend Storage to Raw(Bronze) Container):
+# Step 1: Data Ingestion:
 Data ingestion pipeline is a crucial component of modern data architecture, enabling businesses to efficiently manage and utilize their data. 
 It's the process of importing, transferring, loading, and processing data for later use or storage in a database.
 
@@ -176,7 +176,7 @@ Specify the destination paths (e.g., raw/accounts.csv, raw/customers.csv).
 	
 
 
-# 2.3 Set Up Parameters (Optional for Dynamic Configurations):
+# 2.3 Set Up Parameters:
 Use parameters to define file paths, making your pipeline flexible and easily configurable.
 After adding source and sink linked services,add parameters for both of them as shown in the screenshot below.
 
@@ -209,7 +209,7 @@ If successful, click Publish All to save your pipeline.
 
   
 
-# Step 2: Databricks Activity (Incremental/Delta Processing)
+# Step 2: Databricks Activity:
 # 2.1. Set Up Databricks
 Incremental and delta processing in Databricks allows for the processing of data in a way that is more efficient and cost-effective than repeated batch jobs.
 
@@ -256,7 +256,7 @@ Read Data from Raw (Bronze) Container
       accounts_df = accounts_df.dropDuplicates(["account_id"])
       accounts_df.show(10)
 
-    accounts_df.write.format("parquet").mode("append").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df")
+    accounts_df.write.format("csv").mode("append").option("header", "true").save("abfss://processed@practicestrgacc.dfs.core.windows.net/accounts_df")
     accounts_df.show(10)
 
 screenshots:
@@ -332,7 +332,7 @@ Calculate Total Balance for Each Customer:
 
 
     # Write the sorted DataFrame to Azure Data Lake Storage 
-    result_df.write.format("parquet").mode("overwrite").save("abfss://silver@strgacc2831.dfs.core.windows.net/total_balance_per_customer")
+    result_df.write.format("parquet").mode("append").save("abfss://silver@strgacc2831.dfs.core.windows.net/total_balance_per_customer")
 
 
     # Assuming `total_balance_df` is the DataFrame with the aggregated total balances
@@ -450,64 +450,26 @@ Monitor and analyze logs regularly.
 Optimize Databricks clusters by selecting appropriate VM sizes and autoscaling options.
 
 Use incremental data loads to optimize performance.
-
-# Common Troubleshooting Issues:
-
-# Authentication Failures
-
-Issue: Failing to connect to external services due to authentication issues.
-
-Solution: Verify linked service configurations, especially credentials (e.g., Azure Key Vault secrets, Managed Identity permissions).
-
-# Data Movement Errors
-
-Issue: Data fails to load between stages (e.g., Blob to Databricks or Databricks to Synapse).
-
-Solution: Ensure proper dataset configurations, file paths, and sufficient permissions on storage accounts.
-
-# Pipeline Failures
-
-Issue: Pipeline fails during execution.
-
-Solution: Check the "Monitor" tab for error messages and debug using activity logs.
-
-# Slow Performance
-
-Issue: Pipelines take longer than expected to complete.
-
-Solution: Optimize data partitions, use parallel processing, and adjust Databricks cluster configurations.
-
-# Trigger Misconfigurations
-
-Issue: Scheduled or event-based triggers not firing.
-
-Solution: Verify trigger configurations and ensure "Publish All" is completed.
-
-# Schema Mismatches
-
-Issue: Data format or schema does not match between source and sink.
-
-Solution: Validate schemas during data transformations and ensure compatibility between source and destination.
-
-# Databricks Cluster Issues
-
-Issue: Databricks notebook activity fails due to cluster unavailability.
-
-Solution: Ensure the cluster is running and properly configured with sufficient resources.
-
-# Permission Denied Errors
-
-Issue: Access denied errors when interacting with storage or databases.
-
-Solution: Verify permissions on Azure Storage, Synapse, and other connected resources.
-
-# File Format Errors
-
-Issue: Incorrect file format or delimiter errors.
-
-Solution: Validate the file format and configure the correct file format settings in linked services or external tables.
+=====================================================================
 
 
+# Real-Time Scenarios for Common Troubleshooting Issues
+# 1. Authentication Failures
+Scenario: A Databricks notebook fails to connect to Azure Data Lake Storage (ADLS). Details:
+
+You recently rotated your Azure Key Vault secrets but forgot to update the Databricks secret scope.
+The notebook throws an error: Access denied: Unable to access storage account. Solution:
+Verify that the updated secret is correctly configured in Azure Key Vault.
+Ensure Databricks has Managed Identity access to Key Vault.
+Test connectivity by manually retrieving a small file from ADLS.
+# 2. Data Movement Errors
+Scenario: Data is not moving from ADLS to Synapse Analytics via a pipeline. Details:
+
+The pipeline shows errors such as File not found or Access denied.
+The linked service to ADLS is configured, but the dataset references an incorrect path. Solution:
+Verify the dataset's file path and ensure the file exists in the specified location.
+Check storage permissions, ensuring the service principal has Storage Blob Data Reader access.
+Run the pipeline in debug mode to trace the exact step where the failure occurs.
 
 
 
