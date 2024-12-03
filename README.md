@@ -450,6 +450,7 @@ Monitor and analyze logs regularly.
 Optimize Databricks clusters by selecting appropriate VM sizes and autoscaling options.
 
 Use incremental data loads to optimize performance.
+
 =====================================================================
 
 
@@ -477,9 +478,32 @@ Run the pipeline in debug mode to trace the exact step where the failure occurs.
 
 
 
-# How to create Azure Key Vault:
+# Azure Key Vault Overview
+Azure Key Vault is a cloud service provided by Microsoft Azure to securely store and manage secrets, keys, and certificates. It helps enhance application security by centralizing sensitive information and reducing the risk of accidental exposure.
+
+# Core Use Cases
+### Secrets Management:
+Securely store application secrets like API keys, connection strings, and passwords.
+Enable automated rotation of secrets.
+
+### Key Management:
+Manage cryptographic keys for encryption and decryption.
+Use for signing and verifying operations (e.g., JWTs).
+
+### Certificate Management:
+Securely store and manage SSL/TLS certificates.
+Integrate with Azure services for automatic certificate renewal.
+
+### Access Control:
+Enforce strict access controls using Azure Active Directory (AAD).
+Use Managed Identity for seamless integration with applications.
+### Key Features
+Centralized Secret Storage: Simplifies secret management across applications.
+Access Policies: Granular access control using Azure RBAC and Key Vault Access Policies.
+Audit Logging: Tracks secret access and modification for compliance.
+Integration: Easily integrates with Azure services like Azure App Service, Databricks, and Azure Kubernetes Service (AKS).
 			
-# Create Azure Key-Vault
+## How to Create Azure Key-Vault
 
 Select resource group: “practice2831”
 Key vault name: “mykeyvault1”
@@ -779,7 +803,7 @@ Each of these integration methods offers unique benefits, allowing you to choose
 		![Screenshot 2024-11-29 122654](https://github.com/user-attachments/assets/96426499-4fb9-4975-a77a-21f8410830f8)
 		![Screenshot 2024-11-29 122640](https://github.com/user-attachments/assets/2667292c-45a5-42ad-97bb-e2d96774c6fa)
   
-==============================================================================================
+===================================================================================
 
 # Range Partioning technique in Azure SQl Database
 
@@ -847,6 +871,6 @@ When querying the data, SQL Server will automatically prune irrelevant partition
 If you're working with Azure Synapse Analytics instead of Azure SQL Database, you can use DISTRIBUTION and PARTITION strategies natively, which are different from this approach.
 Partition Management: You can update or modify the partition function and scheme to handle new ranges as your data grows (e.g., adding new years).
 
-========================================================================================================================
+==========================================================================================
 
 
